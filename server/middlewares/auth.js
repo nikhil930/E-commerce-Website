@@ -31,7 +31,6 @@ export const isAdmin = async (req , res , next) =>{ // middle to find the type o
         else{
             next();
         }
-        next();
     }
     catch(err){
         console.log(err);

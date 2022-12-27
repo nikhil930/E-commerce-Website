@@ -1,4 +1,5 @@
 import express from "express";
+import formidable from "express-formidable";
 
 const router = express.Router();
 
@@ -7,13 +8,13 @@ const router = express.Router();
 import {requireSignIn , isAdmin} from "../middlewares/auth.js";
 // because category can only be created by admins
 
-import { create , update , remove , list , read} from "../controllers/category.js";
+import { create , list , read , photo , remove} from "../controllers/product.js";
 
-router.post("/category" , requireSignIn , isAdmin , create);
-router.put("/category/:categoryId" , requireSignIn , isAdmin , update);
-router.delete("/category/:categoryId" ,requireSignIn , isAdmin , remove);
-router.get("/categories" ,list);
-router.get("/category/:slug" , read);
+router.post("/product" , requireSignIn , isAdmin , formidable() , create);  // formidabble ki wajah se req.fields and req.files kar paaye hain
+router.delete("/product/:productId" , requireSignIn , isAdmin , remove);
+router.get("/product/photo/:productId" , photo);
+router.get("/products" ,list);
+router.get("/product/:slug" , read);
 
 
 export default router;
