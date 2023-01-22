@@ -89,8 +89,9 @@ export const remove = async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(
       req.params.productId
-    ).select("-photo");   // Hmne photo issliye deselect ki because hume response me deleted object ko return karna hai
-  } catch (err) {         // aur photo res ko late karwa dega 
+    ).select("-photo"); // Hmne photo issliye deselect ki because hume response me deleted object ko return karna hai
+  } catch (err) {
+    // aur photo res ko late karwa dega
     console.log(err);
   }
 };
@@ -123,11 +124,13 @@ export const update = async (req, res) => {
         return res.json({ error: "photo should be less than 1 mb in size" });
     }
 
-    const product = await Product.findById(req.params.productId , {
-      ...req.fields ,
-      slug:slugify(name),
-    },
-    {new:true}
+    const product = await Product.findById(
+      req.params.productId,
+      {
+        ...req.fields,
+        slug: slugify(name),
+      },
+      { new: true }
     );
 
     if (photo) {

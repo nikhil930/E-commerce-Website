@@ -36,7 +36,7 @@ export const register = async (req , res) =>{
         const existingUser = await User.findOne({email: email});  // also can write just email , if both paramenters are same
 
         if(existingUser){
-            res.json({error:"Email already taken"});
+            return res.json({error:"Email already taken"});
         }
 
         const hashedPassword = await hashPassword(password);

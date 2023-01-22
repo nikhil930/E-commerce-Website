@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.js";
 import morgan from "morgan";
 import categoryRoutes from "./routes/category.js"
 import productRoutes from "./routes/product.js";
+import cors from 'cors';    
 
 dotenv.config();
 
@@ -18,7 +19,10 @@ mongoose.connect(process.env.MONGO_URI).then(() =>
 .catch((err) => console.log("DB Error =>" , err));
 
 // MIDDLEWARE
-
+app.use(cors());        // This middleware is used because our server is running on port 8000
+                        // while our react application is running on port 3000 so we cannot access 
+                        //differennt domain server from our frontend(React) , so cors is used for
+                        //cross-origin-resource access
  app.use(morgan("dev"));
  app.use(express.json());   // to handle the json data so that controller can access it
 
